@@ -1,0 +1,139 @@
+---
+title: "RWorksheet_noblezada#1"
+author: "Necel Kate Noblezada"
+date: "2024-09-04"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+# 1.
+```{r}
+age=c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 42, 53, 41, 51, 35, 24, 33, 41)
+```
+
+#a. How many data points?
+# 34 data points
+```{r}
+length(age)
+```
+#2.
+```{r}
+reciprocal<-1/age
+reciprocal
+```
+#3. 
+#What happen to the new_age?
+# 
+```{r}
+new_age <- c(age, 0, age)
+new_age
+```
+#4.
+```{r}
+sort(age)
+```
+#5.
+```{r}
+min(age)
+max(age)
+```
+
+#6.
+```{r}
+data<-c(2.4, 2.8, 2.1, 2.5, 2.4, 2.2, 2.5, 2.3, 2.5, 2.3, 2.4, 2.7)
+```
+#a. How many data points?
+# 12 data points
+```{r}
+length(data)
+```
+#7.
+
+```{r}
+new_vector <- data
+data * 2
+```
+#What happen to the data?
+# the data vector results in a new vector where each element is twice the original value.
+
+8.1
+```{r}
+a <- seq(1:100)
+```
+8.2
+```{r}
+l <- seq(20,60)
+```
+
+8.3
+```{r}
+i <- mean(20,60)
+```
+
+8.4
+```{r}
+k <- sum(51:91)
+```
+
+8.5
+```{r}
+t <- seq(1:1000)
+```
+#a. How many data points from 8.1 to 8.4?
+# 143 data points
+```{r}
+length1 <- length(a)
+length2 <- length(l)
+length3 <- length(i)
+length4 <- length(k)
+sum (length1+length2+length3+length4)
+```
+#b.Write the R code and its output from 8.1 to 8.4.
+
+```{r}
+a <- seq(1:100)
+l <- seq(20,60)
+i <- mean(20,60)
+k <- sum(51:91)
+```    
+
+#c. For 8.5 find only maximum data points until 10.
+```{r}
+t <- 1:1000
+answer <- max(t[t <- 10])
+answer
+```
+
+
+#9.
+```{r}
+Filter(function(i) { all(i %% c(3,5,7) != 0) }, seq(100))
+```
+
+#10.
+```{r}
+rev(seq(1:100))
+```
+
+#11.
+```{r}
+upper_limit <- 25
+num <- 1:(upper_limit - 1)
+multiples <- num[num %% 3 == 0 | num %% 5 == 0]
+multiples
+```
+#a. How many data points from 10 to 11?
+# 11 data points
+```{r}
+length(multiples)
+```
+#b. Write the R code and its output from 10 and 11.
+#
+
+#12.
+```{r}
+
