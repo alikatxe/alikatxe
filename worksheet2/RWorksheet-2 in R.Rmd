@@ -1,5 +1,5 @@
 ---
-title: "Worksheet-1in R"
+title: "Worksheet-2 in R"
 author: "Necel Kate Noblezada"
 date: "2024-09-25"
 output:
