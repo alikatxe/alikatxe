@@ -1,0 +1,124 @@
+---
+title: "Worksheet-3b in R"
+author: "Necel Kate Noblezada"
+date: "2024-10-02"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1. Create a data frame using the table below.
+respondents <- c(1:20)
+sex <- c(2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2)
+father <- c(1, 3, 3, 3, 1, 2, 3, 1, 1, 1, 3, 2, 1, 3, 3, 1, 3, 1, 2, 1)
+person <- c(5, 7, 3, 8, 5, 9, 6, 7, 8, 4, 7, 5, 4, 7, 8, 8, 3, 11, 7, 6)
+siblings <- c(6, 4, 4, 1, 2, 1, 5, 3, 1, 2, 3, 2, 5, 5, 2, 1, 2, 5, 3, 2)
+type <- c(1, 2, 3, 1, 1, 3, 3, 1, 2, 3, 2, 3, 2, 2, 3, 3, 3, 3, 3, 2)
+# a. Write the codes.
+```{r}
+data <- data.frame(Respondents = respondents, Sex = sex, Father = father, Person = person, Siblings = siblings, Type = type)
+data
+``` 
+# b. Describe the data. Get the structure or the summary of the data
+```{r}
+str(data)
+summary(data)
+``` 
+# c. Is the mean number of siblings attending 5?
+```{r}
+meannum <- mean(siblings)
+meannum 
+```
+# No, the mean is not 5.
+# d. Extract the 1st two rows and then all the columns using the subsetting functions. Write the codes and its output.
+```{r}
+ext <- data[1:2, ]
+ext
+```
+# e. Extract 3rd and 5th row with 2nd and 4th column. Write the codes and its result.
+```{r}
+extracteddata <- data[c(3, 5), c(2, 4)]
+extracteddata
+```
+# f. Select the variable types of houses then store the vector that results as types_houses. Write the codes.
+```{r}
+types_houses <- unique(data$Type)
+types_houses
+```
+# g. Select only all Males respondent that their father occupation was farmer. Write the codes and its output.
+```{r}
+male <- data[data$Sex == 1 & data$Father == 1, ]
+male
+```
+#h. Select only all females respondent that have greater than or equal to 5 number of siblings attending school. Write the codes and its outputs.
+```{r}
+fem <- data[data$Sex == 2 & data$Siblings >= 5, ]
+fem
+```
+# 2. Write a R program to create an empty data frame. Using the following codes:
+```{r}
+df <- data.frame(Ints = integer(),
+                 Doubles = double(),
+                 Characters = character(),
+                 Logicals = logical(),
+                 Factors = factor(),
+                 stringsAsFactors = FALSE)
+
+print("Structure of the empty dataframe:")
+print(str(df))
+```
+# a. Describe the results.
+# The provided R code creates an empty data frame named df with five specified column types: integers, doubles, characters, logicals, and factors. When the structure of this empty data frame is printed using the str() function, it reveals that each column labeled Ints, Doubles, Characters, Logicals, and Factors is defined with the appropriate data type, but all columns contain zero observations (rows). The argument stringsAsFactors = FALSE ensures that any character data remains as character type rather than being automatically converted to factors. Overall, the output confirms that while the data frame is correctly structured to hold various data types, it currently holds no data.
+
+# 3. Create a .csv file of this. Save it as HouseholdData.csv
+```{r}
+household_data <- data.frame(
+  Respondents = 1:10,
+  Sex = c("Male", "Female", "Female", "Male", "Male", "Female", "Female", "Male", "Female", "Male"),
+  Father = c(1, 2, 3, 3, 1, 2, 2, 1, 1, 3),
+  Person = c(5, 7, 3, 8, 6, 4, 2, 4, 11, 6),
+  Siblings = c(5, 3, 3, 5, 6, 3, 1, 2, 6, 6),
+  Type = c("Wood", "Concrete", "Concrete", "Wood", "Semi-concrete", "Semi-concrete", "Wood", "Semi-concrete", "Semi-concrete", "Concrete")
+)
+write.csv(household_data, file = "HouseholdData.csv", row.names = FALSE)
+```
+# a. Import the csv file into the R environment. Write the codes.
+```{r}
+household_data <- read.csv("HouseholdData.csv")
+print(household_data)
+```
+# b. Convert the Sex into factor using factor() function and change it into integer.[Legend: Male = 1 and Female = 2]. Write the R codes and its output.
+```{r}
+household_data$Sex <- factor(household_data$Sex, levels = c("Male", "Female"), labels = c(1, 2))
+household_data$Sex <- as.integer(household_data$Sex)
+print(household_data)
+```
+# c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood = 1; Congrete = 2; Semi-Congrete = 3]. Write the R codes and its output.
+```{r}
+household_data$Type <- factor(household_data$Type, levels = c("Wood", "Concrete", "Semi-concrete"), labels = c(1, 2, 3))
+household_data$Type <- as.integer(household_data$Type)
+print(household_data)
+```
+# d. On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What is the R code and its output?
+```{r}
+household_data$Father <- as.integer(household_data$Father)
+print(household_data)
+```
+# e. Select only all females respondent that has a father whose occupation is driver. Write
+the codes and its output.
+```{r}
+female_driver_respondents <- subset(household_data, Sex == 2 & Father == 2)
+print(female_driver_respondents)
+```
+# f. Select the respondents that have greater than or equal to 5 number of siblings attending school. Write the codes and its output.
+```{r}
+siblings_gte_5 <- subset(household_data, Siblings >= 5)
+print(siblings_gte_5)
+```
+
+# 4. Interpret the graph.
+#The bar graph titled "Sentiments of Tweets Per Day" visually analyzes the distribution of tweet sentiments over several days, from July 14 to July 21, 2020. Sentiments are categorized as negative, neutral, and positive, indicated by red, orange, and blue bars, respectively.
+#The graph clearly shows that negative sentiments were predominant throughout the week, peaking on July 15 and July 20, when negative tweets exceeded 4,000. This suggests that these days experienced heightened negative discussions or reactions on social media. Neutral sentiments are present but remain below the negative ones, indicating a more restrained tone in some tweets. In contrast, positive sentiments are consistently the least frequent, suggesting that optimistic responses were rare during this period.
+#In summary, the graph illustrates a time marked by a prevalence of negativity in social media conversations, with significantly fewer positive or neutral sentiments. This information could be useful for understanding public reactions to specific events or trending topics during this time.
