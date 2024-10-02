@@ -160,7 +160,7 @@ values <- c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
 arrayval <- array(rep(values, each = 2), dim = c(2, 4, 3))
 print(arrayval)
 ```
-# This code creates a three-dimensional array with 4 columns and 2 rows, containing the specified values repeated twice.
+# This code creates a three dimensional array with 4 columns and 2 rows, containing the specified values repeated twice.
 # b. How many dimensions do your array have?
 ```{r}
 dim(arrayval)
