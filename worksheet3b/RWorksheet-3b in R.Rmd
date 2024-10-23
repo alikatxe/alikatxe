@@ -10,64 +10,91 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # 1. Create a data frame using the table below.
-respondents <- c(1:20)
-sex <- c(2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2)
-father <- c(1, 3, 3, 3, 1, 2, 3, 1, 1, 1, 3, 2, 1, 3, 3, 1, 3, 1, 2, 1)
-person <- c(5, 7, 3, 8, 5, 9, 6, 7, 8, 4, 7, 5, 4, 7, 8, 8, 3, 11, 7, 6)
-siblings <- c(6, 4, 4, 1, 2, 1, 5, 3, 1, 2, 3, 2, 5, 5, 2, 1, 2, 5, 3, 2)
-type <- c(1, 2, 3, 1, 1, 3, 3, 1, 2, 3, 2, 3, 2, 2, 3, 3, 3, 3, 3, 2)
 # a. Write the codes.
 ```{r}
-data <- data.frame(Respondents = respondents, Sex = sex, Father = father, Person = person, Siblings = siblings, Type = type)
+respondents <- c(1:20)
+respondents
+```
+
+```{r}
+sex <- c(2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2)
+sex
+```
+
+```{r}
+occupation <- c(1, 2, 2, 2, 1, 2, 3, 1, 1, 1, 3, 2, 1, 3, 3, 1, 3, 1, 2, 1)
+occupation
+```
+
+```{r}
+persons <- c(5, 7, 3, 8, 5, 9, 6, 7, 8, 4, 7, 5, 4, 7, 8, 8, 3, 11, 7, 6)
+persons
+```
+
+```{r}
+siblings <- c(6, 4, 4, 1, 2, 1, 5, 3, 1, 2, 3, 2, 5, 5, 2, 1, 2, 5, 3, 2)
+siblings
+```
+
+```{r}
+houses <- c(1, 2, 3, 1, 1, 3, 3, 1, 2, 3, 2, 3, 2, 2, 3, 3, 3, 3, 3, 2)
+houses
+```
+
+```{r}
+data <- data.frame(respondents, sex, occupation, persons, siblings, houses)
 data
-``` 
+```
 # b. Describe the data. Get the structure or the summary of the data
 ```{r}
 str(data)
 summary(data)
-``` 
-# c. Is the mean number of siblings attending 5?
-```{r}
-meannum <- mean(siblings)
-meannum 
 ```
-# No, the mean is not 5.
-# d. Extract the 1st two rows and then all the columns using the subsetting functions. Write the codes and its output.
+# c. Is the mean number of siblings attending is 5?
+# No
 ```{r}
-ext <- data[1:2, ]
-ext
+mean_num <- mean(siblings)
+mean_num
+```
+# d. Extract the 1st two rows and then all the columns using the subsetting functions. Write the codes and its output.
+
+```{r}
+extract <- data[1:2, ]
+extract
 ```
 # e. Extract 3rd and 5th row with 2nd and 4th column. Write the codes and its result.
+
 ```{r}
-extracteddata <- data[c(3, 5), c(2, 4)]
-extracteddata
+extracted_data <- data[c(3, 5), c(2, 4)]
+(extracted_data)
 ```
-# f. Select the variable types of houses then store the vector that results as types_houses. Write the codes.
+# f. Select the variable types of houses then store the vector that results as types_houses. Write the codes.  
 ```{r}
-types_houses <- unique(data$Type)
+types_houses <- class(houses)
 types_houses
 ```
 # g. Select only all Males respondent that their father occupation was farmer. Write the codes and its output.
+ 
 ```{r}
-male <- data[data$Sex == 1 & data$Father == 1, ]
-male
+male_farmers <- data[data$Sex == 1 & data$Occupation == 1, ]
+print(male_farmers)
 ```
-#h. Select only all females respondent that have greater than or equal to 5 number of siblings attending school. Write the codes and its outputs.
+# h. Select only all females respondent that have greater than or equal to 5 number of siblings attending school. Write the codes and its outputs.
+
 ```{r}
-fem <- data[data$Sex == 2 & data$Siblings >= 5, ]
-fem
+female <-  data[data$Sex == 2 & data$Siblings >= 5, ]
+print(female)
 ```
 # 2. Write a R program to create an empty data frame. Using the following codes:
 ```{r}
-df <- data.frame(Ints = integer(),
-                 Doubles = double(),
-                 Characters = character(),
-                 Logicals = logical(),
-                 Factors = factor(),
-                 stringsAsFactors = FALSE)
+df = data.frame(Ints=integer(),
 
+Doubles=double(), Characters=character(),
+Logicals=logical(),
+Factors=factor(),
+stringsAsFactors=FALSE)
 print("Structure of the empty dataframe:")
-print(str(df))
+str(df)
 ```
 # a. Describe the results.
 # The provided R code creates an empty data frame named df with five specified column types: integers, doubles, characters, logicals, and factors. When the structure of this empty data frame is printed using the str() function, it reveals that each column labeled Ints, Doubles, Characters, Logicals, and Factors is defined with the appropriate data type, but all columns contain zero observations (rows). The argument stringsAsFactors = FALSE ensures that any character data remains as character type rather than being automatically converted to factors. Overall, the output confirms that while the data frame is correctly structured to hold various data types, it currently holds no data.
@@ -77,44 +104,52 @@ print(str(df))
 household_data <- data.frame(
   Respondents = 1:10,
   Sex = c("Male", "Female", "Female", "Male", "Male", "Female", "Female", "Male", "Female", "Male"),
-  Father = c(1, 2, 3, 3, 1, 2, 2, 1, 1, 3),
-  Person = c(5, 7, 3, 8, 6, 4, 2, 4, 11, 6),
-  Siblings = c(5, 3, 3, 5, 6, 3, 1, 2, 6, 6),
-  Type = c("Wood", "Concrete", "Concrete", "Wood", "Semi-concrete", "Semi-concrete", "Wood", "Semi-concrete", "Semi-concrete", "Concrete")
-)
-write.csv(household_data, file = "HouseholdData.csv", row.names = FALSE)
+  Fathers_Occupation = c(1, 2, 3, 3, 1, 2, 2, 1, 1, 3),
+  Persons_at_Home = c(5, 7, 3, 8, 6, 4, 2, 4, 11, 6),
+  Siblings_at_School = c(5, 3, 3, 5, 6, 3, 1, 2, 6, 6),
+  Types_of_Houses = c("Wood", "Concrete", "Concrete", "Wood", "Semi-concrete", "Semi-concrete", "Wood", "Semi-concrete", "Semi-concrete", "Concrete"))
+household_data
+
+write.csv(df, "HouseholdData.csv", row.names = FALSE)
 ```
 # a. Import the csv file into the R environment. Write the codes.
 ```{r}
 household_data <- read.csv("HouseholdData.csv")
+
 print(household_data)
 ```
 # b. Convert the Sex into factor using factor() function and change it into integer.[Legend: Male = 1 and Female = 2]. Write the R codes and its output.
 ```{r}
 household_data$Sex <- factor(household_data$Sex, levels = c("Male", "Female"), labels = c(1, 2))
+
 household_data$Sex <- as.integer(household_data$Sex)
 print(household_data)
 ```
 # c. Convert the Type of Houses into factor and change it into integer. [Legend: Wood = 1; Congrete = 2; Semi-Congrete = 3]. Write the R codes and its output.
 ```{r}
-household_data$Type <- factor(household_data$Type, levels = c("Wood", "Concrete", "Semi-concrete"), labels = c(1, 2, 3))
-household_data$Type <- as.integer(household_data$Type)
+household_data$Types_of_Houses <- factor(household_data$Types_of_Houses, levels = c("Wood", "Concrete", "Semi-concrete"), labels = c(1, 2, 3))
+
+household_data$Types_of_Houses <- as.integer(household_data$Types_of_Houses)
+
 print(household_data)
 ```
 # d. On father’s occupation, factor it as Farmer = 1; Driver = 2; and Others = 3. What is the R code and its output?
 ```{r}
-household_data$Father <- as.integer(household_data$Father)
+household_data$Fathers_Occupation <- factor(household_data$Fathers_Occupation, levels = c(1, 2, 3), labels = c("Farmer", "Driver", "Others"))
+
+household_data$Fathers_Occupation <- as.integer(household_data$Fathers_Occupation)
+
 print(household_data)
+
 ```
-# e. Select only all females respondent that has a father whose occupation is driver. Write
-the codes and its output.
+# e. Select only all females respondent that has a father whose occupation is driver. Write the codes and its output.
 ```{r}
-female_driver_respondents <- subset(household_data, Sex == 2 & Father == 2)
-print(female_driver_respondents)
+fem_driver_respondents <- subset(household_data, Sex == 2 & Fathers_Occupation == 2)
+print(fem_driver_respondents)
 ```
 # f. Select the respondents that have greater than or equal to 5 number of siblings attending school. Write the codes and its output.
 ```{r}
-siblings_gte_5 <- subset(household_data, Siblings >= 5)
+siblings_gte_5 <- subset(household_data, siblings >= 5)
 print(siblings_gte_5)
 ```
 
