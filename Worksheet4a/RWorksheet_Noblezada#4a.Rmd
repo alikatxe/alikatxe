@@ -1,0 +1,235 @@
+---
+title: "Worksheet - 4a in R"
+author: "Necel Kate Noblezada"
+date: "2024-10-16"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1.The table below shows the data about shoe size and height. Create a data frame.
+```{r}
+sframe <- data.frame(
+  
+  Shoe_size = c(6.5, 9.0, 8.5, 8.5, 10.5, 7.0, 9.5, 9.0, 13.0, 7.5, 10.5, 8.5, 12.0,               10.5,13.0, 11.5, 8.5, 5.0, 10.0, 6.5, 7.5, 8.5, 10.5, 8.5, 10.5, 11.0, 9.0,  13.0),
+  
+  Height = c(66.0, 68.0, 64.5, 65.0, 70.0, 64.0, 70.0, 71.0, 72.0, 64.0, 74.5, 67.0,               71.0, 71.0, 77.0, 72.0, 59.0, 62.0, 72.0, 66.0, 64.0, 67.0, 73.0, 69.0, 72.0, 70.0, 69.0, 70.0),
+  
+  Gender = c("F", "F", "F", "F", "M", "F", "F", "F", "M", "F", "M", "F", "M", "M", "M", "M", "F", "F", "M", "F", "F", "M", "M", "F", "M", "M", "M", "M")
+)
+sframe
+```
+# a.Describe the data.
+# The data contains two sets of observations for shoe size, height, and gender.
+
+# b.Create a subset by males and females with their corresponding shoe size and height.
+What its result? Show the R scripts.
+```{r}
+males <- sframe[sframe$Gender == "M", c("Shoe_size", "Height")]
+females <- sframe[sframe$Gender == "F", c("Shoe_size", "Height")]
+
+males
+females
+```
+# c.Find the mean of shoe size and height of the respondents. Write the R scripts and its
+result.
+```{r}
+mean_shoe_size <- mean(sframe$Shoe_size)
+mean_height <- mean(sframe$Height)
+
+mean_shoe_size
+mean_height
+```
+# d.Is there a relationship between shoe size and height? Why?
+```{r}
+correlation <- cor(sframe$Shoe_size, sframe$Height)
+correlation
+```
+# Yes, there is a positive relationship between shoe size and height, as individuals with larger shoe sizes tend to also have greater heights, which can be supported by the correlation analysis and visual representation of the data.
+
+
+# 2.Construct character vector months to a factor with factor() and assign the result to factor_months_vector. Print out factor_months_vector and assert that R prints out the factor levels below the actual values. Consider data consisting of the names of months:
+# "March","April","January","November","January", "September","October","September","November","August", "January","November","November","February","May","August", "July","December","August","August","September","November","February",| April")
+```{r}
+months_vector <- c(
+  "March", "April", "January", "November", "January", "September", "October", 
+  "September", "November", "August", "January", "November", "November", "February", 
+  "May", "August", "July", "December", "August", "August", "September", "November", 
+  "February", "April")
+months_vector
+
+factor_months_vector <- factor(months_vector)
+
+factor_months_vector
+```
+
+
+# 3. Then check the summary() of the months_vector and factor_months_vector. | Interpret the results of both vectors. Are they both equally useful in this case?
+```{r}
+summary(months_vector)
+
+summary(factor_months_vector)
+```
+
+
+# 4. Create a vector and factor for the table below.
+# Direction Frequency
+# East        1
+# West        4
+# North       3
+# Note: Apply the factor function with required order of the level. new_order_data <- factor(factor_data,levels = c("East","West","North")) print(new_order_data)
+```{r}
+directions_vector <- c("East", "West", "North")
+frequencies_vector <- c(1, 4, 3)
+
+factor_data <- factor(directions_vector)
+
+new_order_data <- factor(factor_data, levels = c("East", "West", "North"))
+
+new_order_data
+```
+
+
+# 5. Enter the data below in Excel with file name = import_march.csv
+# a. Import the excel file into the Environment Pane using read.table() function. Write the code.
+```{r}
+data <- read.table("import_march.csv", header = TRUE, sep = ",")
+```
+# b. View the dataset. Write the R scripts and its result.
+```{r}
+data
+```
+
+# Using Conditional Statements (IF-ELSE)
+`# 6. Full Search
+# Exhaustive search is a methodology for finding an answer by exploring all possible cases. When trying to find a desired number in a set of given numbers, the method of finding the corresponding number by checking all elements in the set one by one can be called an exhaustive search. Implement an exhaustive search function that meets the input/output conditions below.
+# a. Create an R Program that allows the User to randomly select numbers from 1 to 50. Then display the chosen number. If the number is beyond the range of the selected choice, it will have to display a string “The number selected is beyond the range of 1 to 50”. If number 20 is inputted by the User, it will have to display “TRUE”, otherwise display the input number.
+```{r}
+exhaustive_search <- function() {
+  chosen_number <- as.integer(readline(prompt = "Please enter a number between 1 and 50: "))
+  
+  if (is.na(chosen_number)) {
+    cat("Invalid input. Please enter a valid integer number between 1 and 50.\n")
+    return()
+  }
+  
+  cat("You have chosen the number:", chosen_number, "\n")
+  
+  if (chosen_number < 1 || chosen_number > 50) {
+    cat("The number selected is beyond the range of 1 to 50.\n")
+  } else if (chosen_number == 20) {
+    cat("TRUE\n")
+  } else {
+    cat("You selected the number:", chosen_number, "\n")
+  }
+}
+
+exhaustive_search()
+```
+
+# 7. Change
+# At ISATU University’s traditional cafeteria, snacks can only be purchased with bills. A long-standing rule at the concession stand is that snacks must be purchased with as few coins as possible. There are three types of bills: 50 pesos, 100 pesos, 200 pesos, 500 pesos, 1000 pesos.
+# a. Write a function that prints the minimum number of bills that must be paid, given the price of the snack. Input: Price of snack (a random number divisible by 50) Output: Minimum number of bills needed to purchase a snack.
+```{r}
+min_bills <- function(price) {
+  bills <- c(1000, 500, 200, 100, 50)
+  count <- 0
+  
+  for (bill in bills) {
+    while (price >= bill) {
+      price <- price - bill
+      count <- count + 1
+    }
+  }
+  
+  cat("Minimum number of bills needed:", count, "\n")
+}
+
+min_bills(850)
+```
+
+# 8. The following is each student’s math score for one semester. Based on this, answer the following questions.
+# Name   Grade1 Grade2 Grade3 Grade4
+# Annie    85     65     85    100
+# Thea     65     75     90    90
+# Steve    75     55     80    85
+# Hanna    95     75     100   90
+# a. Create a dataframe from the above table. Write the R codes and its output.
+```{r}
+scores <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+
+scores
+```
+b. Without using the rowMean function, output the average score of students whose average math score over 90 points during the semester. write R code and its output.
+# Example Output: Annie’s average grade this semester is 88.75.
+```{r}
+scores <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+
+for (i in 1:nrow(scores)) {
+  average_score <- (scores$Grade1[i] + scores$Grade2[i] + scores$Grade3[i] + scores$Grade4[i]) / 4
+  if (average_score > 90) {
+    cat(scores$Name[i], "’s average grade this semester is", round(average_score, 2), "\n")
+  }
+}
+```
+# c. Without using the mean function, output as follows for the tests in which the average score was less than 80 out of 4 tests.
+# Example output: The nth test was difficult.
+```{r}
+scores <- data.frame(
+  Name = c("Annie", "Thea", "Steve", "Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+
+for (test in 1:4) {
+  total_score <- 0
+  for (i in 1:nrow(scores)) {
+    total_score <- total_score + scores[i, test + 1]  # test + 1 because the first column is 'Name'
+  }
+  average_score <- total_score / nrow(scores)
+  if (average_score < 80) {
+    cat("The", test, "test was difficult.\n")
+  }
+}
+
+```
+# d. Without using the max function, output as follows for students whose highest score for a semester exceeds 90 points.
+# Example Output: Annie’s highest grade this semester is 95.
+```{r}
+scores <- data.frame(
+  Name = c("Annie", "Thea", "Steve","Hanna"),
+  Grade1 = c(85, 65, 75, 95),
+  Grade2 = c(65, 75, 55, 75),
+  Grade3 = c(85, 90, 80, 100),
+  Grade4 = c(100, 90, 85, 90)
+)
+
+for (i in 1:nrow(scores)) {
+  highest_score <- scores[i, 2]  # Start with the first grade
+  for (j in 3:5) {
+    if (scores[i, j] > highest_score) {
+      highest_score <- scores[i, j]
+    }
+  }
+  if (highest_score > 90) {
+    cat(scores$Name[i], "’s highest grade this semester is", highest_score, "\n")
+  }
+}
+
+```
