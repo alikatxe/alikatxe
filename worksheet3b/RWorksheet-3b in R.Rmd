@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # 1. Create a data frame using the table below.
-# a. Write the codes. 
+# a. Write the codes.
 ```{r}
 respondents <- c(1:20)
 respondents
