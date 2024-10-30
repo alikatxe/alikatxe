@@ -168,7 +168,7 @@ scores <- data.frame(
 
 scores
 ```
-b. Without using the rowMean function, output the average score of students whose average math score over 90 points during the semester. write R code and its output.
+# b. Without using the rowMean function, output the average score of students whose average math score over 90 points during the semester. write R code and its output.
 # Example Output: Annie’s average grade this semester is 88.75.
 ```{r}
 scores <- data.frame(
