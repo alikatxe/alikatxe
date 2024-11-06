@@ -1,0 +1,42 @@
+---
+title: "RWorksheret#5|_group(Cabia, Camasa, Noblezada)"
+author: "Cabia, Camasa, Noblezada"
+date: "2024-11-06"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(polite)
+library(kableExtra)
+library(rmarkdown)
+
+url <- 'https://www.amazon.com/ref=nav_logo'
+
+session <- bow(url,
+              user_agent = "Educational")
+session
+```
+
+```{r}
+library(polite)
+library(kableExtra)
+library(rmarkdown)
+
+url <- 'https://www.imdb.com/search/title/?title_type=tv_series&sort=num_votes,desc'
+
+session <- bow(url,
+              user_agent = "Educational")
+session
+
+rank_title <- character(0)
+links <- character(0)
+
+```
+
+```{r}
+
+```
