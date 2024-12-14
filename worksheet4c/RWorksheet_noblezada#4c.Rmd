@@ -1,0 +1,111 @@
+---
+title: "Worksheet-4c in R"
+author: "Necel Kate Noblezada"
+date: "2024-10-30"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1. Use the dataset mpg
+# A data frame with 234 rows and 11 variables:
+#’ \describe{
+#’ \item{manufacturer}{manufacturer name}
+#’ \item{model}{model name}
+#’ \item{displ}{engine displacement, in litres}
+#’ \item{year}{year of manufacture}
+#’ \item{cyl}{number of cylinders}
+#’ \item{trans}{type of transmission}
+#’ \item{drv}{the type of drive train, where f = front-wheel drive, r = rear wheel drive, 4 = 4wd}
+#’ \item{cty}{city miles per gallon}
+#’ \item{hwy}{highway miles per gallon}
+#’ \item{fl}{fuel type}
+#’ \item{class}{"type" of car}
+#’ }
+# "mpg"
+# - Download and open the mpg file. Upload it to your OWN environment
+# a. Show your solutions on how to import a csv file into the environment.
+```{r}
+library(readr)
+ mpg<-read_csv("mpg.csv")
+```
+# b. Which variables from mpg dataset are categorical?
+# manufacturer-The carmanufacturer (e.g.,Audi, Chevrolet).-model- trans- drv- cyl- fl- class
+manufacturer
+# c. Which are continuous variables?
+- displ
+- year
+- cyt
+- hwy
+
+# 2. Which manufacturer has the most models in this data set? Which model has the most variations?
+ Show your answer
+```{r}
+ library(dplyr)
+```
+```{r}
+ manufacturer_model_count <- mpg %>%
+ group_by(manufacturer) %>%
+ summarise(model_count = n_distinct(model)) %>%
+ arrange(desc(model_count))
+ most_models <- manufacturer_model_count[1, ]
+ model_variation_count <- mpg %>%
+ group_by(model) %>%
+ summarise(variation_count = n()) %>%
+ arrange(desc(variation_count))
+ most_variations_model <- model_variation_count[1, ]
+ most_models
+```
+# a. Group the manufacturers and find the unique models. Show your codes and result
+```{r}
+unique_models <- mpg %>%
+ group_by(manufacturer) %>%
+ summarise(unique_models = list(unique(model))) %>%
+ arrange(manufacturer)
+ print(unique_models)
+```
+# b. Graph the result by using plot() and ggplot(). Write the codes and its result.
+```{r}
+ model <- mpg %>%
+ group_by(manufacturer) %>%
+ summarise(unique_count = n_distinct(model)) %>%
+ arrange(desc(unique_count))
+ barplot(model$unique_count,
+ names.arg = model$manufacturer,
+ las = 2,
+ col = "lightgrey",
+ main = "Number of Unique Models by Manufacturer",
+ xlab = "Manufacturer",
+ ylab = "Number of Unique Models")
+```
+```{r}
+ ggplot(model, aes(x = reorder(manufacturer, unique_count), y = unique_count)) +
+ geom_bar(stat = "identity", fill = "lightgrey") +
+ coord_flip() +
+ labs(title = "Number of Unique Models by Manufacturer",
+ x = "Manufacturer",
+ y = "Number of Unique Models") +
+ theme_minimal()
+```
+
+# 2. Same dataset will be used. You are going to show the relationship of the model and the manufacturer.
+# a. What does ggplot(mpg, aes(model, manufacturer))+geom_point() show?
+# 
+# b. For you, is it useful? If not,how could you modify the data to make it more informative? Usefulness:
+# 
+
+# 3. Plot the model and the year using ggplot(). Use only the top 20 observations. Write the codes and its results.
+```{r}
+ Top_20<-mpg%>%
+ arrange(desc(cty)) %>%
+ head(20)
+ ggplot(Top_20, aes(x=model,y=year))+
+ geom_point() +
+ labs(title="Top20ModelsbyYear",x="Model",y="Year") +
+ theme(axis.text.x=element_text(angle=90,hjust=0.5))
+```
+
+
+
